@@ -1,0 +1,17 @@
+/*·(c)·https://github.com/MontiCore/monticore·*/
+package mc;
+
+import de.monticore.types.MCBasicTypes ;
+import de.monticore.symbols.BasicSymbols ;
+import de.monticore.expressions.CommonExpressions ;
+import de.monticore.literals.MCCommonLiterals  ;
+
+grammar Questionnaire extends MCBasicTypes, BasicSymbols, CommonExpressions, MCCommonLiterals   {
+	symbol scope(ordered) Form implements Diagram = "form" Name "{" FormElement* "}";
+
+	interface FormElement;
+
+	symbol Question implements FormElement, Variable = Name ":" label:String MCType ("(" computed:Expression ")")?;
+
+	IfGuard implements FormElement = "if" "(" guard:Expression ")" "{" FormElement* "}";
+}

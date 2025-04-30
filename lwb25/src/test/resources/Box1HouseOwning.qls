@@ -1,0 +1,35 @@
+style for form Box1HouseOwning {
+  title "Box 1"
+  style hasSoldHouse with color "red"
+  style hasSoldHouse with font-family "Lucida Console, serif"
+
+  // An alternative would be add an extension to the Q-language
+  // which adds sections & groups directly as elements
+
+  page "Housing" {
+    section "Sold" {
+      question hasSoldHouse {
+        color "blue"
+        font-family "Lucida Console, serif"
+        widget Dropdown[Yes=true,No=false]
+
+      }
+      section "Additional questions" {
+        question sellingPrice {
+          // In a perfect world, we would have type information
+          // about the valid widgets available & check against this
+          widget Slider[min=0,max=100000,default=30]
+        }
+        question privateDebt
+        question valueResidue {
+          widget Text
+        }
+      }
+    }
+  }
+
+  page "O" {
+    question a
+    question b
+  }
+}

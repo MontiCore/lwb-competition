@@ -1,0 +1,24 @@
+MontiCore Grammar
+    filter docstring_rm_comments
+    filter replace_regex \\$
+    filter replace_between_regex (["'])(.*?/\*)(.*?)\1 (.*?) "xx"
+    filter replace_between_regex (["'])(.*?\*/)(.*?)\1 (.*?) "xx"
+    filter call_regexp_common C++
+    extension mc4
+    3rd_gen_scale 1.36
+Questionnaire Model
+    filter docstring_rm_comments
+    filter replace_regex \\$
+    filter replace_between_regex (["'])(.*?/\*)(.*?)\1 (.*?) "xx"
+    filter replace_between_regex (["'])(.*?\*/)(.*?)\1 (.*?) "xx"
+    filter call_regexp_common C++
+    extension q
+    3rd_gen_scale 1.36
+QLS Model
+    filter docstring_rm_comments
+    filter replace_regex \\$
+    filter replace_between_regex (["'])(.*?/\*)(.*?)\1 (.*?) "xx"
+    filter replace_between_regex (["'])(.*?\*/)(.*?)\1 (.*?) "xx"
+    filter call_regexp_common C++
+    extension qls
+    3rd_gen_scale 1.36

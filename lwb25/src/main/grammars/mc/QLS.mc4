@@ -1,0 +1,28 @@
+/*·(c)·https://github.com/MontiCore/monticore·*/
+package mc;
+
+grammar QLS extends Questionnaire {
+	symbol scope(ordered) StyleFile implements Diagram = "style" "for" "form" Name "{" StyleElement* "}";
+
+	interface StyleElement;
+
+	TitleElement implements StyleElement = "title" String;
+
+  // As questions can be defined in multiple locations, symbol references are not hat useful
+	QuestionStyle implements StyleElement = "style" Name@Question "with" QuestionStyleElement;
+
+  interface QuestionStyleElement;
+  astrule QuestionStyleElement = type:Name;
+
+  Page implements StyleElement = "page" String "{" StyleElement* "}";
+  Section implements StyleElement = "section" String "{" StyleElement* "}";
+  StyleQuestion implements StyleElement = "question" Name@Question ("{" QuestionElement* "}")?;
+
+  interface QuestionElement;
+  QuestionElementColorStyle implements QuestionElement,QuestionStyleElement = type:"color" color:String;
+  QuestionElementFontStyle  implements QuestionElement,QuestionStyleElement = type:"font-family" font:String;
+  QuestionElementWidget     implements QuestionElement = widget:Name ("[" (WidgetParam || ",")+  "]")?;
+  // Accept any literal as an optional value
+  WidgetParam = key:Name ( "=" value:Literal)?;
+
+}

@@ -1,0 +1,62 @@
+/* (c) https://github.com/MontiCore/monticore */
+plugins {
+  id "java-library" // Java plus providing specific knowledge about Java libraries
+  id "de.monticore.generator" version "$mc_version" // MontiCore Plugin
+  id 'de.monticore.language-server' version "$mc_version"
+  id "maven-publish"
+}
+
+group = 'de.monticore.languages.questionaire'
+version = mc_version
+
+allprojects {
+  // Where can we find the dependencies?
+  repositories {
+    if (("true").equals(getProperty('useLocalRepo'))) {
+      mavenLocal()
+    }
+    maven {
+      credentials.username mavenUser
+      credentials.password mavenPassword
+      url repo
+    }
+    mavenCentral()
+
+  }
+}
+dependencies {
+  testImplementation platform('org.junit:junit-bom:5.10.0')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+
+dependencies {
+  // Depend on the MontiCore language library (which in term depends on the runtime)
+  grammar "de.monticore:monticore-grammar:$mc_version"
+}
+
+// LSP-Editor
+
+dependencies {
+  implementation "de.monticore.language-server:monticore-language-server-runtime:$mc_version"
+}
+
+
+task autoconfigure(type: de.mclsg.task.AutoconfigureTask){
+  mclsg {
+    languageName = "mc.Questionnaire"
+    fileExtension = "q"
+    addModelPathEntry(file("src/main/grammars"))
+  }
+  including(de.mclsg.TaskTypes.VSCODE_PLUGIN)
+}
+generateMCGrammars.dependsOn(tasks.generateQuestionnaireLanguageServer)
+buildQuestionnaireVscodePlugin.dependsOn(tasks.packageQuestionnaireVscodePlugin)
+
+tasks.runQuestionnaireVscodePluginAttached {
+  modelProjectDir = "src/test/resources"
+}
