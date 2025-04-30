@@ -1,4 +1,3 @@
-
 ### Main Sources
 
 ```
@@ -46,3 +45,20 @@ SUM:                              41            237             88           110
 ---------------------------------------------------------------------------------
 
 ```
+
+### Rough Times
+
+ Work                                                                                             | Rough Time               
+--------------------------------------------------------------------------------------------------|--------------------------
+ Questionnaire DSL Syntax + Gradle Setup + Positive Parser Test                                   | 15 min                   
+ ~~JavaX Faces Setup (Generation Target)~~                                                        | ~~60 min until given up~~ 
+ FTL Generator (Rendering, Propagation, Saving, HTML Page Structure)                              | 60 min                    
+ Type System (incl. money type extension + Type-Safety CoCos/Verification + negative JUnit Tests) | 90 min                    
+ Questionnaire LSP Editor Setup                                                                   | 45 min                    
+ Design QLS Example Model                                                                         | 30 min                    
+ QSL Language Syntax                                                                              | 15 min                    
+ Include QSL within the Generator, Pagination, Styling                                            | 120 min                   
+ Code Clean-Up & Documentation                                                                    | TBD                      
+
+*Disclaimer:* The developer is experienced with MontiCore grammars,
+ but less comfortable with the type-system or LSP editor generation.
