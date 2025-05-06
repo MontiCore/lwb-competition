@@ -39,6 +39,15 @@ dependencies {
   grammar "de.monticore:monticore-grammar:$mc_version"
 }
 
+// For the Q-Generator
+tasks.register("runGenerator", JavaExec) {
+  group = "mc"
+  description = "Run the Q-GuiGenerator on Box1HouseOwning.q"
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'mc.GuiGenerator'
+  dependsOn compileJava
+}
+
 // LSP-Editor
 
 dependencies {

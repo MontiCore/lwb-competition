@@ -1,4 +1,49 @@
-### Main Sources
+# LWB 25: Questionnaire
+
+
+### Structure:
+As MontiCore is a tool without its own user interface, 
+ Gradle is used to invoke MontiCore and build this project.
+ * [build.gradle](build.gradle), [gradle.properties](gradle.properties), 
+ [settings.gradle](settings.gradle): Gradle setup
+ * [src/main/grammars](src/main/grammars): contains the grammar files defining 
+ the syntax of both grammars.
+ * [src/main/java](src/main/java): contains the handwritten (Java) files for 
+ the context conditions and generator
+ *  [src/main/resources](src/main/resources): contains the FreeMarker templates
+    * [widget](src/main/resources/q/widget): contains the templates for input 
+    options, such as a dropdown, a number, a slider, etc.
+ * [src/test/java](src/test/java): contains  
+   * [src/test/resources](src/test/resources): contains test questionnaire and 
+     questionnaire styling models
+     * [invalid](src/test/resources/invalid): contains explicitly incorrect 
+     models to trigger the CoCo tests
+* _build/generated-sources/_
+  * _monticore/_: target directory for the MontiCore (DSL)
+   generator, containing the resulting AST, ST, etc. classes.
+  * _Questionnaire/language-server/_: target directory for the LSP-based editor.
+* _genout/_: target of the Q-GUI-Generator, containing the resulting HTML files
+
+Executing the `gradle runGenerator` command performs checking & generation on 
+the [Box1HouseOwning.q](src/test/resources/Box1HouseOwning.q) model.
+The [genout](genout/) directory now contains the resulting HTML file.
+
+Executing the `gradle runQuestionnaireVscodePluginAttached` command launches 
+ VSCode with the Questionnaire DSL editor running.
+
+An example of the _src/test/resources/_ models opened within the editor can be 
+seen in the following picture:
+![LSP-based editor view of the incorrect Cycle.q model](vscode.png)
+The semantic error (found via a CoCo) is highlighted in line 3.
+
+### Requirements:
+You will need:
+ * [Java JDK 11](https://adoptopenjdk.net/releases.html) or later
+ * [Gradle 7.6.4](https://gradle.org/install/) or later
+ * (optional) [VSCode](https://code.visualstudio.com/)
+
+### Lines of Code
+### #Main Sources
 
 ```
 cloc-2.04.exe --read-lang-def=my_definitions.txt src/main
@@ -19,7 +64,7 @@ SUM:                              29            191             77            80
 
 ```
 
-### Including Tests, Example Models, and Gradle SetUp
+#### Including Tests, Example Models, and Gradle SetUp
 
 ```
 cloc-2.04.exe --read-lang-def=my_definitions.txt 85cfe83f96c25709de6f34320af9ff532674ba89
